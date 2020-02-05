@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SAKSHAM KISAN</title>
+        <link type="text/css" rel="stylesheet" href = "style.css">
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-firestore.js"></script>
+
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use 
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDaB5B5Z_HarxWPV5FgkEiK0jdS0_80sGc",
+    authDomain: "datas-30e24.firebaseapp.com",
+    databaseURL: "https://datas-30e24.firebaseio.com",
+    projectId: "datas-30e24",
+    storageBucket: "datas-30e24.appspot.com",
+    messagingSenderId: "226585081860",
+    appId: "1:226585081860:web:dc23ffba021775767f1d51",
+    measurementId: "G-PY42Q03GEB"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  
+const db = firebase.firestore();
+
+
+
+</script>
+<script src="chat.js"></script>
+
+    </head>
+    <body>
+        
+<div id="take_message">
+          
+    <input type="email" id="inp_mesg" placeholder="Email">
+   <button class="favorite styled" onclick='users()'>Chat</button><br>    
+   <!--- <button class="open-button" onclick="users()">Chat</button> -->
+</div>
+
+<!--------------------------------------------------------------------------------------------->
+<div id="users_container">
+   
+</div>
+<div id="chat_box">
+<div id="users_container1">
+    <div>
+        <table id="messg_table">
+            <tbody id="chat_table"></tbody>
+        </table>
+    </div>
+</div>
+<div id="users_input">
+
+</div>
+
+<div class="chat-popup" id="myForm">
+    <div class="form-container" id = "message_container">  
+      <input placeholder="Type message.." id="msg" required style="width: 500px;height: 40px;border-radius: 20px;">
+      
+      <button type="button" class="btn" onclick="send_messg()" >Send</button>
+      <button type="button" class="btn-cancel" onclick="closeForm()">Close</button>
+    </div>
+  </div>
+</div>
+<!--
+       <script>
+           const taker =document.querySelector('take_messages');
+            var docRef = db.collection("messages").doc().get().then(function (doc) {
+                    if (doc.exists) {
+                        console.log("Document data:", doc.data());
+                        document.getElementById('mesg').innerHTML = doc.data().mesg;
+                        for (let [key, value] of Object.entries(doc.data())) {
+                            console.log(`${key}: ${value}`);
+                            if (key == 'shubham@gmail.com'){
+                                taker.write('shubham@gmail.com');
+                            }
+
+                        }
+                    } else {
+                        // doc.data() will be undefined in this case
+                        console.log("You ain’t Signin yet");
+                    }
+                }).catch(function (error) {
+                    console.log("Error getting document:", error);
+                }); 
+                                       
+        </script>   
+        
+-->
+
+<!---------------------------------creating a cookie------------------------------------------->
+ <!---      <div id="create_cookie">
+        <script type = "text/javascript">
+            
+               function WriteCookie() {
+                  cookievalue = "shubham@gmail.com";
+                  document.cookie = "Email =" + cookievalue;
+                 // document.write ("Setting Cookies : " + "name=" + cookievalue );
+               }
+        </script>  
+       </div>
+    -->
+<!----------------------------------************************------------------------------------>
+
+
+
+<!----------------------------------Getting all the cookies------------------------------------->
+<!---
+
+        <div id="get_Cookie">
+           <script>
+                       function ReadCookie() {
+                            var allcookies = document.cookie;
+                          //  document.write("All Cookies : " + allcookies);
+
+                            //reading all cookie in array
+                            cookiearray = allcookies.split(';');
+
+                            // Now take key value pair out of this array
+                            for (var i = 0; i < cookiearray.length; i++) {
+                                name = cookiearray[i].split('=')[0];
+                                value = cookiearray[i].split('=')[1];
+                                if (name == 'shubham@gmail.com') {
+                                    return name
+                                } else {
+                                   continue; 
+                                }
+                                console.log(name + " : " + value);
+                            }
+                        }
+                    //    ReadCookie()
+           </script>
+       </div>
+    -->
+<!---------------------------------*********************---------------------------------------->
+
+
+
+<!---------------------------------creating users list----------------------------------------->
+<!---
+
+
+    <div id="chat_user">
+        <script>
+            var message ;
+            var div1 = document.querySelector('#users_container1')
+            //const taker = document.querySelector('#take_message');
+            var divv = document.querySelector('#users_container');
+                     
+            function users(){
+                document.getElementById('take_message').style.display = "none";
+
+                message = document.getElementById('inp_mesg').value;
+                document.innerHTML += "<center style = background-color:green;font-size:50px; >"+"hello "+message+" start chatting with the users"+"</center>";
+                db.collection("Users").get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    var button = document.createElement("button");
+                    //button.innerHTML = "Do Something";
+                    console.log(doc.id);
+                    //document.write("<br><br>");
+                    // document.write('<button  onclick = "message_()" >'+doc.id+"</button>");
+                    //divv.innerHTML += `<div class='links'><a href = 'javascript:message_()' style = 'background-color: #f44336;color: white;padding: 14px 25px;text-align: center;border-style: solid; font-size:large;'>`+doc.id+`</a></div>`;
+                    //divv.innerHTML +=`<div class = "chat-popup" id = 'myForm'><form`  
+                    divv.innerHTML +=`<br><br><button class = "open-button" onclick = "message_()">`+doc.id+`</button>`
+                });
+            });
+            }
+        </script>
+
+    </div>
+-->
+
+<!---------------------------------------------------------------------------------------------->
+
+<!-----------------------------------Chatting-------------------------------------------------->
+
+<!---------------------------------------------------------------------------------------------->
+
+
+
+
+
+<!------------------------------------Message display------------------------------------------>
+ <!---       <div id="mesg">
+            <script >
+                var docRef = db.collection("messages").doc('7BX4WMgByv8XELzlJk2B').get().then(function (doc) {
+                        if (doc.exists) {
+                            console.log("Document data:", doc.data());
+                            document.getElementById('mesg').innerHTML = doc.data().mesg;
+                        } else {
+                            // doc.data() will be undefined in this case
+                            console.log("You ain’t Signin yet");
+                        }
+                    }).catch(function (error) {
+                        console.log("Error getting document:", error);
+                    }); 
+                    
+                    
+            </script>   
+        </div>
+    -->
+<!--------------------------------------------------------------------------------------------->
+
+
+
+<!---
+        <script>
+            function send_messg(){
+                var message = document.getElementById('input_message').value;
+                console.log(message);
+                var from_user = 'shubham';
+                var to_user = 'hera';
+                var today = new Date();
+                var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                var dateTime = date+' '+time;
+               // var time_ = firebase.firestore.FieldValue.serverTimestamp()
+                db.collection('messages').doc(dateTime).set({
+                    mesg : message,
+                    from : from_user,
+                    to : to_user,
+                    time : dateTime
+                });
+                console.log('message sent!');                
+                div2.innerHTML+=message_()
+                console.log('new_message_sent!');
+
+
+
+            }
+
+            function getmail(){
+
+            }
+
+        </script>
+    -->
+
+<!------------------------------------------------------------------------------------->
+ <!--       <script>
+            function recieve_username(){
+                //var message = document.getElementById('inp_mesg').value;
+                var docRef = db.collection("messages").doc(message).get().then(function (doc) {
+                    if (doc.exists) {
+                        console.log("Document data:", doc.data());
+                        document.getElementById('mesg').innerHTML = doc.data().mesg;
+                        for (let [key, value] of Object.entries(doc.data())) {
+                            console.log(`${key}: ${value}`);
+                            if (value == 'shubham@gmail.com'){
+                                    
+                            }
+
+                        }
+                    } else {
+                        // doc.data() will be undefined in this case
+                        console.log("You ain’t Signin yet");
+                    }
+                }).catch(function (error) {
+                    console.log("Error getting document:", error);
+                }); 
+                
+            }
+        </script>
+
+
+
+       <div>
+           <script>
+               function clients() {
+                   
+               }
+           </script>
+       </div>
+
+
+    -->        
+
+    </body>
+</html>
+
+
+
+
+
+
